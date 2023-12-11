@@ -46,7 +46,7 @@ const externallApiUri = `https://eventplus.azurewebsites.net/api`;
 // const externalApiUri = null;
 
 const api = axios.create({
-    baseURL: localApiUri
+    baseURL: externallApiUri
 });
 
 
