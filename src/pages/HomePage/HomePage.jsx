@@ -53,7 +53,7 @@ const HomePage = () => {
         <Container>
           {/* <Title titleText={"Próximos Eventos"} /> */}
 
-          <div className="events-box">
+          <div className="eventos-box">
             {nextEvents.map((e) => {
               return (
                 <NextEvent
