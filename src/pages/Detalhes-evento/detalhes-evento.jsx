@@ -16,233 +16,263 @@ import api, {
 import "./detalhes-evento.css";
 import { UserContext } from "../../context/AuthContext";
 
-const EventosAlunoPage = () => {
-  // state do menu mobile
 
+const detalhesEvento = () => {
   const [eventos, setEventos] = useState([]);
-  // select mocado
-  // const [quaisEventos, setQuaisEventos] = useState([
-  const quaisEventos = [
-    { value: 1, text: "Todos os eventos" },
-    { value: 2, text: "Meus eventos" },
-  ];
 
   const [tipoEvento, setTipoEvento] = useState("1"); //código do tipo do Evento escolhido
   const [showSpinner, setShowSpinner] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  // recupera os dados globais do usuário
   const { userData } = useContext(UserContext);
   const [comentario, setComentario] = useState("");
   const [idEvento, setIdEvento] = useState("");
   const [idComentario, setIdComentario] = useState(null);
 
   useEffect(() => {
-    loadEventsType();
-  }, [tipoEvento, userData.userId]); //
-
-  async function loadEventsType() {
-    setShowSpinner(true);
-    // setEventos([]); //zera o array de eventos
-    if (tipoEvento === "1") {
-      //todos os eventos (Evento)
-      try {
-        const todosEventos = await api.get(eventsResource);
-        const meusEventos = await api.get(
-          `${myEventsResource}/${userData.userId}`
-        );
-
-        const eventosMarcados = verificaPresenca(
-          todosEventos.data,
-          meusEventos.data
-        );
-
-        setEventos(eventosMarcados);
-
-        // console.clear();
-
-        // console.log("TODOS OS EVENTOS");
-        // console.log(todosEventos.data);
-
-        // console.log("MEUS EVENTOS");
-        // console.log(meusEventos.data);
-
-        // console.log("EVENTOS MARCADOSSSS:");
-        // console.log(eventosMarcados);
-      } catch (error) {
-        //colocar o notification
-        console.log("Erro na API");
-        console.log(error);
-      }
-    } else if (tipoEvento === "2") {
-      /**
-       * Lista os meus eventos (PresencasEventos)
-       * retorna um formato diferente de array
-       */
-      try {
-        const retornoEventos = await api.get(
-          `${myEventsResource}/${userData.userId}`
-        );
-        // console.clear();
-        // console.log("MINHAS PRESENÇAS");
-        // console.log(retornoEventos.data);
-
-        const arrEventos = []; //array vazio
-
-        retornoEventos.data.forEach((e) => {
-          arrEventos.push({
-            ...e.evento,
-            situacao: e.situacao,
-            idPresencaEvento: e.idPresencaEvento,
-          });
-        });
-
-        // console.log(arrEventos);
-        setEventos(arrEventos);
-      } catch (error) {
-        //colocar o notification
-        console.log("Erro na API");
-        console.log(error);
-      }
-    } else {
-      setEventos([]);
-    }
-    setShowSpinner(false);
-  }
-  const verificaPresenca = (arrAllEvents, eventsUser) => {
-    for (let x = 0; x < arrAllEvents.length; x++) {
-      //para cada evento principal
-      for (let i = 0; i < eventsUser.length; i++) {
-        //procurar a correspondência em minhas presenças
-        if (arrAllEvents[x].idEvento === eventsUser[i].evento.idEvento) {
-          arrAllEvents[x].situacao = true;
-          arrAllEvents[x].idPresencaEvento = eventsUser[i].idPresencaEvento;
-          break; //paro de procurar para o evento principal atual
+    async function loadComentsType() {
+      if (comentario === "1") {
+        try {
+          const todosComentarios = await api.get(commentaryEventResource);
+        } 
+        catch (error) {
+          console.log("Erro")
         }
       }
+      
     }
+  }, [])
+}
 
-    //retorna todos os eventos marcados com a presença do usuário
-    return arrAllEvents;
-  };
 
-  // toggle meus eventos ou todos os eventos
-  function myEvents(tpEvent) {
-    setTipoEvento(tpEvent);
-  }
 
-  const showHideModal = (idEvent) => {
-    // console.clear();
-    // console.log("id do evento atual");
-    // console.log(idEvent);
+// const EventosAlunoPage = () => {
+//   // state do menu mobile
 
-    setShowModal(showModal ? false : true);
-    // setUserData({ ...userData, idEvento: idEvent });
-    setIdEvento(idEvent);
-    // console.log("após guardar no state do usuário");
-    // console.log(idEvent);
-  };
+//   const [eventos, setEventos] = useState([]);
+//   // select mocado
+//   // const [quaisEventos, setQuaisEventos] = useState([
+//   const quaisEventos = [
+//     { value: 1, text: "Todos os eventos" },
+//     { value: 2, text: "Meus eventos" },
+//   ];
 
-  // ler um comentário - get
-  const loadMyCommentary = async (idUsuario, idEvento) => {
-    // console.log("fui chamado");
+//   const [tipoEvento, setTipoEvento] = useState("1"); //código do tipo do Evento escolhido
+//   const [showSpinner, setShowSpinner] = useState(false);
+//   const [showModal, setShowModal] = useState(false);
 
-    try {
-      // api está retornando sempre todos os comentários do usuário
-      const promise = await api.get(
-        `${commentaryEventResource}?idUsuario=${idUsuario}&idEvento=${idEvento}`
-      );
+//   // recupera os dados globais do usuário
+//   const { userData } = useContext(UserContext);
+//   const [comentario, setComentario] = useState("");
+//   const [idEvento, setIdEvento] = useState("");
+//   const [idComentario, setIdComentario] = useState(null);
 
-      const myComm = await promise.data.filter(
-        (comm) => comm.idEvento === idEvento && comm.idUsuario === idUsuario
-      );
+//   useEffect(() => {
+//     loadEventsType();
+//   }, [tipoEvento, userData.userId]); //
 
-      // console.log("QUANTIDADE DE DADOS NO ARRAY FILTER");
-      // console.log(myComm.length);
-      // console.log(myComm);
+//   async function loadEventsType() {
+//     setShowSpinner(true);
+//     // setEventos([]); //zera o array de eventos
+//     if (tipoEvento === "1") {
+//       //todos os eventos (Evento)
+//       try {
+//         const todosEventos = await api.get(eventsResource);
+//         const meusEventos = await api.get(
+//           `${myEventsResource}/${userData.userId}`
+//         );
 
-      setComentario(myComm.length > 0 ? myComm[0].descricao : "");
-      setIdComentario(myComm.length > 0 ? myComm[0].idComentarioEvento : null);
-    } catch (error) {
-      console.log("Erro ao carregar o evento");
-      console.log(error);
-    }
-  };
+//         const eventosMarcados = verificaPresenca(
+//           todosEventos.data,
+//           meusEventos.data
+//         );
 
-  // cadastrar um comentário = post
-  const postMyCommentary = async (descricao, idUsuario, idEvento) => {
-    try {
-      const promise = await api.post(commentaryEventResource, {
-        descricao: descricao,
-        exibe: true,
-        idUsuario: idUsuario,
-        idEvento: idEvento,
-      });
+//         setEventos(eventosMarcados);
 
-      if (promise.status === 200) {
-        alert("Comentário cadastrado com sucesso");
-      }
-    } catch (error) {
-      console.log("Erro ao cadastrar o evento");
-      console.log(error);
-    }
-  };
+//         // console.clear();
 
-  // remove o comentário - delete
-  const commentaryRemove = async (idComentario) => {
-    // alert("Remover o comentário " + idComentario);
+//         // console.log("TODOS OS EVENTOS");
+//         // console.log(todosEventos.data);
 
-    try {
-      const promise = await api.delete(
-        `${commentaryEventResource}/${idComentario}`
-      );
-      if (promise.status === 200) {
-        alert("Evento excluído com sucesso!");
-      }
-    } catch (error) {
-      console.log("Erro ao excluir ");
-      console.log(error);
-    }
-  };
+//         // console.log("MEUS EVENTOS");
+//         // console.log(meusEventos.data);
 
-  async function handleConnect(eventId, whatTheFunction, presencaId = null) {
-    if (whatTheFunction === "connect") {
-      try {
-        //connect
-        const promise = await api.post(presencesEventResource, {
-          situacao: true,
-          idUsuario: userData.userId,
-          idEvento: eventId,
-        });
+//         // console.log("EVENTOS MARCADOSSSS:");
+//         // console.log(eventosMarcados);
+//       } catch (error) {
+//         //colocar o notification
+//         console.log("Erro na API");
+//         console.log(error);
+//       }
+//     } else if (tipoEvento === "2") {
+//       /**
+//        * Lista os meus eventos (PresencasEventos)
+//        * retorna um formato diferente de array
+//        */
+//       try {
+//         const retornoEventos = await api.get(
+//           `${myEventsResource}/${userData.userId}`
+//         );
+//         // console.clear();
+//         // console.log("MINHAS PRESENÇAS");
+//         // console.log(retornoEventos.data);
 
-        if (promise.status === 201) {
-          loadEventsType();
-          alert("Presença confirmada, parabéns");
-        }
-      } catch (error) {}
-      return;
-    }
+//         const arrEventos = []; //array vazio
 
-    // unconnect - aqui seria o else
-    try {
-      const unconnected = await api.delete(
-        `${presencesEventResource}/${presencaId}`
-      );
-      if (unconnected.status === 204) {
-        loadEventsType();
-        alert("Desconectado do evento");
-      }
-    } catch (error) {
-      console.log("Erro ao desconecar o usuário do evento");
-      console.log(error);
-    }
-  }
+//         retornoEventos.data.forEach((e) => {
+//           arrEventos.push({
+//             ...e.evento,
+//             situacao: e.situacao,
+//             idPresencaEvento: e.idPresencaEvento,
+//           });
+//         });
+
+//         // console.log(arrEventos);
+//         setEventos(arrEventos);
+//       } catch (error) {
+//         //colocar o notification
+//         console.log("Erro na API");
+//         console.log(error);
+//       }
+//     } else {
+//       setEventos([]);
+//     }
+//     setShowSpinner(false);
+//   }
+//   const verificaPresenca = (arrAllEvents, eventsUser) => {
+//     for (let x = 0; x < arrAllEvents.length; x++) {
+//       //para cada evento principal
+//       for (let i = 0; i < eventsUser.length; i++) {
+//         //procurar a correspondência em minhas presenças
+//         if (arrAllEvents[x].idEvento === eventsUser[i].evento.idEvento) {
+//           arrAllEvents[x].situacao = true;
+//           arrAllEvents[x].idPresencaEvento = eventsUser[i].idPresencaEvento;
+//           break; //paro de procurar para o evento principal atual
+//         }
+//       }
+//     }
+
+//     //retorna todos os eventos marcados com a presença do usuário
+//     return arrAllEvents;
+//   };
+
+//   // toggle meus eventos ou todos os eventos
+//   function myEvents(tpEvent) {
+//     setTipoEvento(tpEvent);
+//   }
+
+//   const showHideModal = (idEvent) => {
+//     // console.clear();
+//     // console.log("id do evento atual");
+//     // console.log(idEvent);
+
+//     setShowModal(showModal ? false : true);
+//     // setUserData({ ...userData, idEvento: idEvent });
+//     setIdEvento(idEvent);
+//     // console.log("após guardar no state do usuário");
+//     // console.log(idEvent);
+//   };
+
+//   // ler um comentário - get
+//   const loadMyCommentary = async (idUsuario, idEvento) => {
+//     // console.log("fui chamado");
+
+//     try {
+//       // api está retornando sempre todos os comentários do usuário
+//       const promise = await api.get(
+//         `${commentaryEventResource}?idUsuario=${idUsuario}&idEvento=${idEvento}`
+//       );
+
+//       const myComm = await promise.data.filter(
+//         (comm) => comm.idEvento === idEvento && comm.idUsuario === idUsuario
+//       );
+
+//       // console.log("QUANTIDADE DE DADOS NO ARRAY FILTER");
+//       // console.log(myComm.length);
+//       // console.log(myComm);
+
+//       setComentario(myComm.length > 0 ? myComm[0].descricao : "");
+//       setIdComentario(myComm.length > 0 ? myComm[0].idComentarioEvento : null);
+//     } catch (error) {
+//       console.log("Erro ao carregar o evento");
+//       console.log(error);
+//     }
+//   };
+
+//   // cadastrar um comentário = post
+//   const postMyCommentary = async (descricao, idUsuario, idEvento) => {
+//     try {
+//       const promise = await api.post(commentaryEventResource, {
+//         descricao: descricao,
+//         exibe: true,
+//         idUsuario: idUsuario,
+//         idEvento: idEvento,
+//       });
+
+//       if (promise.status === 200) {
+//         alert("Comentário cadastrado com sucesso");
+//       }
+//     } catch (error) {
+//       console.log("Erro ao cadastrar o evento");
+//       console.log(error);
+//     }
+//   };
+
+//   // remove o comentário - delete
+//   const commentaryRemove = async (idComentario) => {
+//     // alert("Remover o comentário " + idComentario);
+
+//     try {
+//       const promise = await api.delete(
+//         `${commentaryEventResource}/${idComentario}`
+//       );
+//       if (promise.status === 200) {
+//         alert("Evento excluído com sucesso!");
+//       }
+//     } catch (error) {
+//       console.log("Erro ao excluir ");
+//       console.log(error);
+//     }
+//   };
+
+//   async function handleConnect(eventId, whatTheFunction, presencaId = null) {
+//     if (whatTheFunction === "connect") {
+//       try {
+//         //connect
+//         const promise = await api.post(presencesEventResource, {
+//           situacao: true,
+//           idUsuario: userData.userId,
+//           idEvento: eventId,
+//         });
+
+//         if (promise.status === 201) {
+//           loadEventsType();
+//           alert("Presença confirmada, parabéns");
+//         }
+//       } catch (error) {}
+//       return;
+//     }
+
+//     // unconnect - aqui seria o else
+//     try {
+//       const unconnected = await api.delete(
+//         `${presencesEventResource}/${presencaId}`
+//       );
+//       if (unconnected.status === 204) {
+//         loadEventsType();
+//         alert("Desconectado do evento");
+//       }
+//     } catch (error) {
+//       console.log("Erro ao desconecar o usuário do evento");
+//       console.log(error);
+//     }
+//   }
 
   return (
     <>
       <MainContent>
         <Container>
-          <Title titleText={"Eventos"} additionalClass="custom-title" />
+          <Title titleText={"Comentários"} additionalClass="custom-title" />
 
           <Select
             id="id-tipo-evento"
@@ -278,6 +308,6 @@ const EventosAlunoPage = () => {
       ) : null}
     </>
   );
-};
 
-export default EventosAlunoPage;
+
+export default detalhes-evento;
