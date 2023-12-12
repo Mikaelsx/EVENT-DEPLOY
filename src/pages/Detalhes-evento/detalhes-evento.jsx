@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import MainContent from "../../components/MainContent/MainContent";
 import Title from "../../components/Title/Title";
-import Table from "./TableDTE/TableDTE";
+import TableE from "./TableDTE/TableDTE";
 import Container from "../../components/Container/Container";
 import { Select } from "../../components/FormComponents/FormComponents";
 import Spinner from "../../components/Spinner/Spinner";
@@ -283,7 +283,7 @@ const detalhesEvento = () => {
             defaultValue={tipoEvento}
             additionalClass="select-tp-evento"
           />
-          <Table
+          <TableE
             dados={eventos}
             fnConnect={handleConnect}
             fnShowModal={showHideModal}
