@@ -8,7 +8,7 @@ import EventosPage from "../pages/EventosPage/EventosPage";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import TestePage from "../pages/TestePage/TestePage";
 import EventosAlunoPage from "../pages/EventosAlunoPage/EventosAlunoPage";
-import DetalhePage from "../pages/Detalhes-evento/detalhes-evento"
+import DetalhePage from "../pages/Detalhes-evento/DetalhesEvento"
 
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
