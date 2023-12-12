@@ -42,7 +42,7 @@ const detalhesEvento = () => {
       
     }
   }, [])
-}
+
 
 
 
@@ -308,6 +308,6 @@ const detalhesEvento = () => {
       ) : null}
     </>
   );
-
+};
 
 export default detalhes-evento;
