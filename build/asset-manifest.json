@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/static/css/main.dac4f92d.css",
+    "main.js": "/static/js/main.45985aad.js",
+    "static/media/Poppins-Thin.ttf": "/static/media/Poppins-Thin.59ff6a729e30c99b478e.ttf",
+    "static/media/Poppins-Regular.ttf": "/static/media/Poppins-Regular.35d26b781dc5fda684cc.ttf",
+    "static/media/Poppins-Medium.ttf": "/static/media/Poppins-Medium.673ed42382ab264e0bf5.ttf",
+    "static/media/Poppins-SemiBold.ttf": "/static/media/Poppins-SemiBold.ac8d04b620e54be9b0f0.ttf",
+    "static/media/banner-desktop.png": "/static/media/banner-desktop.68f0d4841486dcc70be9.png",
+    "static/media/tipo-evento.svg": "/static/media/tipo-evento.90bcb40960c9720ae8593d61931e7d18.svg",
+    "static/media/banner-mobile.png": "/static/media/banner-mobile.f96a3780e6c9ff4dd56e.png",
+    "static/media/success-illustration.svg": "/static/media/success-illustration.487989c0150bdddcc4bc0b3872694444.svg",
+    "static/media/vision-background-desktop.png": "/static/media/vision-background-desktop.d9afeda8a72558bda5f4.png",
+    "static/media/error-illustration.svg": "/static/media/error-illustration.ef277a5c0267d7917d0d82cb36d6be89.svg",
+    "static/media/login.svg": "/static/media/login.6d4bb9a8d18ae6d7562dd81c31b71178.svg",
+    "static/media/warning-illustration.svg": "/static/media/warning-illustration.d1b604656a20ace21005fd8881382761.svg",
+    "static/media/logo-pink.svg": "/static/media/logo-pink.0a5600d7fb7bc54c649a22864399f9e9.svg",
+    "static/media/spinner-loading.svg": "/static/media/spinner-loading.bc9a40612f35ce86a71760f7789f6e1c.svg",
+    "static/media/logo-white.svg": "/static/media/logo-white.4696100bd54024929a6e0c6c502d6df8.svg",
+    "static/media/icone-logout.svg": "/static/media/icone-logout.7f737b173a590f956ff4d4695012b4da.svg",
+    "static/media/comentary-icon.svg": "/static/media/comentary-icon.915db501e75f00f77a179d6e4d322dfe.svg",
+    "static/media/edit-pen.svg": "/static/media/edit-pen.0718365abab5d7303491e5b9f4386c15.svg",
+    "static/media/trash-delete.svg": "/static/media/trash-delete.f2d463bb49b6d5b42ff74f05c7806f6b.svg",
+    "index.html": "/index.html",
+    "main.dac4f92d.css.map": "/static/css/main.dac4f92d.css.map",
+    "main.45985aad.js.map": "/static/js/main.45985aad.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dac4f92d.css",
+    "static/js/main.45985aad.js"
+  ]
+}
