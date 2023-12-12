@@ -235,38 +235,38 @@ const detalhesEvento = () => {
 //     }
 //   };
 
-//   async function handleConnect(eventId, whatTheFunction, presencaId = null) {
-//     if (whatTheFunction === "connect") {
-//       try {
-//         //connect
-//         const promise = await api.post(presencesEventResource, {
-//           situacao: true,
-//           idUsuario: userData.userId,
-//           idEvento: eventId,
-//         });
+  async function handleConnect(eventId, whatTheFunction, presencaId = null) {
+    if (whatTheFunction === "connect") {
+      try {
+        //connect
+        const promise = await api.post(presencesEventResource, {
+          situacao: true,
+          idUsuario: userData.userId,
+          idEvento: eventId,
+        });
 
-//         if (promise.status === 201) {
-//           loadEventsType();
-//           alert("Presença confirmada, parabéns");
-//         }
-//       } catch (error) {}
-//       return;
-//     }
+        if (promise.status === 201) {
+          loadEventsType();
+          alert("Presença confirmada, parabéns");
+        }
+      } catch (error) {}
+      return;
+    }
 
-//     // unconnect - aqui seria o else
-//     try {
-//       const unconnected = await api.delete(
-//         `${presencesEventResource}/${presencaId}`
-//       );
-//       if (unconnected.status === 204) {
-//         loadEventsType();
-//         alert("Desconectado do evento");
-//       }
-//     } catch (error) {
-//       console.log("Erro ao desconecar o usuário do evento");
-//       console.log(error);
-//     }
-//   }
+    // unconnect - aqui seria o else
+    try {
+      const unconnected = await api.delete(
+        `${presencesEventResource}/${presencaId}`
+      );
+      if (unconnected.status === 204) {
+        loadEventsType();
+        alert("Desconectado do evento");
+      }
+    } catch (error) {
+      console.log("Erro ao desconecar o usuário do evento");
+      console.log(error);
+    }
+  }
 
   return (
     <>
