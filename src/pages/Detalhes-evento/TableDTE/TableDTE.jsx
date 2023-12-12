@@ -7,7 +7,7 @@ import "react-tooltip/dist/react-tooltip.css";
 // import { Tooltip } from "react-tooltip";
 
 // import trashDelete from "../../../assets/images/trash-delete.svg";
-import "./TableEvA.css";
+import "./TableDTE.css";
 
 const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
   return (
