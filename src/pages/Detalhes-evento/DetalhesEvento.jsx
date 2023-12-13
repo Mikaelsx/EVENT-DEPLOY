@@ -238,10 +238,12 @@ const DetalhesEvento = () => {
   return (
     <MainContent>
         <Container>
-          <Title titleText={"Eventos"} additionalClass="custom-title" />
+          <Title titleText={"Comentários"} additionalClass="custom-title" />
         </Container>
     </MainContent>
   )
+
+  
 
 //     {/* <>
 //       <MainContent>
