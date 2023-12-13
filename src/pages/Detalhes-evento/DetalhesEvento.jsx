@@ -18,49 +18,52 @@ import { UserContext } from "../../context/AuthContext";
 
 
 const DetalhesEvento = () => {
+  // state do menu mobile
+
   const [eventos, setEventos] = useState([]);
+  // select mocado
+  // const [quaisEventos, setQuaisEventos] = useState([
+  const quaisEventos = [
+    { value: 1, text: "Todos os eventos" },
+    { value: 2, text: "Meus eventos" },
+  ];
 
   const [tipoEvento, setTipoEvento] = useState("1"); //código do tipo do Evento escolhido
   const [showSpinner, setShowSpinner] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
+  // recupera os dados globais do usuário
   const { userData } = useContext(UserContext);
   const [comentario, setComentario] = useState("");
   const [idEvento, setIdEvento] = useState("");
   const [idComentario, setIdComentario] = useState(null);
 
-  const quaisComents = [
-    { value: 1, text: "Todos os comentários" }
-  ];
-
   useEffect(() => {
     loadEventsType();
-  }, [comentario, userData.userId]); //
+  }, [tipoEvento, userData.userId]); //
 
   async function loadEventsType() {
     setShowSpinner(true);
     // setEventos([]); //zera o array de eventos
-    if (comentario === "1") {
+    if (tipoEvento === "1") {
       //todos os eventos (Evento)
       try {
-        const todosComentarios = await api.get(commentaryEventResource);
-
-        const comentariosMarcados = verificaPresenca(
-          todosComentarios.data
+        const todosEventos = await api.get(eventsResource);
+        const meusEventos = await api.get(
+          `${myEventsResource}/${userData.userId}`
         );
 
-        setComentario(comentariosMarcados);
+        const eventosMarcados = verificaPresenca(
+          todosEventos.data,
+          meusEventos.data
+        );
+
+        setEventos(eventosMarcados);
 
         // console.clear();
 
-        console.log("TODOS OS COMENTÁRIOS");
-        console.log(todosComentarios.data);
-        
-        console.log("COMENTÁRIOS");
-        console.log(comentario.data);
-        
-        console.log("TODOS OS COMENTÁRIOS MARCADOS");
-        console.log(comentariosMarcados.data);
+        // console.log("TODOS OS EVENTOS");
+        // console.log(todosEventos.data);
 
         // console.log("MEUS EVENTOS");
         // console.log(meusEventos.data);
@@ -72,38 +75,38 @@ const DetalhesEvento = () => {
         console.log("Erro na API");
         console.log(error);
       }
-    // } else if (tipoEvento === "2") {
-    //   /**
-    //    * Lista os meus eventos (PresencasEventos)
-    //    * retorna um formato diferente de array
-    //    */
-    //   try {
-    //     const retornoEventos = await api.get(
-    //       `${myEventsResource}/${userData.userId}`
-    //     );
-    //     // console.clear();
-    //     // console.log("MINHAS PRESENÇAS");
-    //     // console.log(retornoEventos.data);
+    } else if (tipoEvento === "2") {
+      /**
+       * Lista os meus eventos (PresencasEventos)
+       * retorna um formato diferente de array
+       */
+      try {
+        const retornoEventos = await api.get(
+          `${myEventsResource}/${userData.userId}`
+        );
+        // console.clear();
+        // console.log("MINHAS PRESENÇAS");
+        // console.log(retornoEventos.data);
 
-    //     const arrEventos = []; //array vazio
+        const arrEventos = []; //array vazio
 
-    //     retornoEventos.data.forEach((e) => {
-    //       arrEventos.push({
-    //         ...e.evento,
-    //         situacao: e.situacao,
-    //         idPresencaEvento: e.idPresencaEvento,
-    //       });
-    //     });
+        retornoEventos.data.forEach((e) => {
+          arrEventos.push({
+            ...e.evento,
+            situacao: e.situacao,
+            idPresencaEvento: e.idPresencaEvento,
+          });
+        });
 
-    //     // console.log(arrEventos);
-    //     setEventos(arrEventos);
-    //   } catch (error) {
-    //     //colocar o notification
-    //     console.log("Erro na API");
-    //     console.log(error);
-    //   }
-    // } else {
-    //   setEventos([]);
+        // console.log(arrEventos);
+        setEventos(arrEventos);
+      } catch (error) {
+        //colocar o notification
+        console.log("Erro na API");
+        console.log(error);
+      }
+    } else {
+      setEventos([]);
     }
     setShowSpinner(false);
   }
@@ -129,14 +132,14 @@ const DetalhesEvento = () => {
     setTipoEvento(tpEvent);
   }
 
-  const showHideModal = (idComentario) => {
+  const showHideModal = (idEvent) => {
     // console.clear();
     // console.log("id do evento atual");
     // console.log(idEvent);
 
     setShowModal(showModal ? false : true);
     // setUserData({ ...userData, idEvento: idEvent });
-    setIdComentario(idComentario);
+    setIdEvento(idEvent);
     // console.log("após guardar no state do usuário");
     // console.log(idEvent);
   };
@@ -236,31 +239,22 @@ const DetalhesEvento = () => {
     }
   }
 
-  // return (
-  //   <MainContent>
-  //       <Container>
-  //         <Title titleText={"Comentários"} additionalClass="custom-title" />
-  //       </Container>
-  //   </MainContent>
-  // )
-
-  
-return (
-     <>
+  return (
+    <>
       <MainContent>
         <Container>
-          <Title titleText={"Comentários"} additionalClass="custom-title" />
+          <Title titleText={"Eventos"} additionalClass="custom-title" />
 
           <Select
             id="id-tipo-evento"
             name="tipo-evento"
             required={true}
-            options={quaisComents} // aqui o array dos tipos
+            options={quaisEventos} // aqui o array dos tipos
             manipulationFunction={(e) => myEvents(e.target.value)} // aqui só a variável state
             defaultValue={tipoEvento}
             additionalClass="select-tp-evento"
           />
-          <TableE
+          <Table
             dados={eventos}
             fnConnect={handleConnect}
             fnShowModal={showHideModal}
@@ -270,7 +264,7 @@ return (
       {/* SPINNER -Feito com position */}
       {showSpinner ? <Spinner /> : null}
 
-       {showModal ? (
+      {showModal ? (
         <Modal
           // userId={userData.userId}
           showHideModal={showHideModal}
@@ -284,7 +278,8 @@ return (
         />
       ) : null}
     </>
-)
+  );
 };
+
 
 export default DetalhesEvento;
