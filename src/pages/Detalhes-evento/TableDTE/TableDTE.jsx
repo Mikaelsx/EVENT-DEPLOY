@@ -20,9 +20,9 @@ const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
           <th className="tbal-data__head-title tbal-data__head-title--big">
             Data
           </th>
-          {/* <th className="tbal-data__head-title tbal-data__head-title--big">
+          <th className="tbal-data__head-title tbal-data__head-title--big">
             Ações
-          </th> */}
+          </th>
         </tr>
       </thead>
       <tbody>
