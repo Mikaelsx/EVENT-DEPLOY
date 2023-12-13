@@ -249,7 +249,7 @@ const DetalhesEvento = () => {
             id="id-tipo-evento"
             name="tipo-evento"
             required={true}
-            options={quaisEventos} // aqui o array dos tipos
+            options={quaisComents} // aqui o array dos tipos
             manipulationFunction={(e) => myEvents(e.target.value)} // aqui só a variável state
             defaultValue={tipoEvento}
             additionalClass="select-tp-evento"
