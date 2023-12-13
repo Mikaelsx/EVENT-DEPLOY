@@ -38,25 +38,25 @@ const DetalhesEvento = () => {
 
   useEffect(() => {
     loadEventsType();
-  }, [comentario, userData.userId]); //
+  }, [tipoEvento, userData.userId]); //
 
   async function loadEventsType() {
     setShowSpinner(true);
     // setEventos([]); //zera o array de eventos
-    if (comentario === "1") {
+    if (tipoEvento === "1") {
       //todos os eventos (Evento)
       try {
-        const todosDetalhes = await api.get(commentaryEventResource);
+        const todosEventos = await api.get(eventsResource);
         const meusEventos = await api.get(
           `${myEventsResource}/${userData.userId}`
         );
 
-        const detalhesMarcados = verificaPresenca(
-          todosDetalhes.data,
+        const eventosMarcados = verificaPresenca(
+          todosEventos.data,
           meusEventos.data
         );
 
-        setComentario(detalhesMarcados);
+        setEventos(eventosMarcados);
 
         // console.clear();
 
