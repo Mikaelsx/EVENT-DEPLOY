@@ -119,9 +119,9 @@ const DetalhesEvento = () => {
   };
 
   // toggle meus eventos ou todos os eventos
-  // function myEvents(tpEvent) {
-  //   setTipoEvento(tpEvent);
-  // }
+  function myEvents(tpEvent) {
+    setTipoEvento(tpEvent);
+  }
 
   const showHideModal = (idComentario) => {
     // console.clear();
