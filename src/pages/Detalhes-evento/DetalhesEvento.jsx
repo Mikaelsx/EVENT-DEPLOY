@@ -55,6 +55,12 @@ const DetalhesEvento = () => {
 
         console.log("TODOS OS COMENTÁRIOS");
         console.log(todosComentarios.data);
+        
+        console.log("COMENTÁRIOS");
+        console.log(comentario.data);
+        
+        console.log("TODOS OS COMENTÁRIOS MARCADOS");
+        console.log(comentariosMarcados.data);
 
         // console.log("MEUS EVENTOS");
         // console.log(meusEventos.data);
@@ -149,9 +155,9 @@ const DetalhesEvento = () => {
         (comm) => comm.idEvento === idEvento && comm.idUsuario === idUsuario
       );
 
-      console.log("QUANTIDADE DE DADOS NO ARRAY FILTER");
-      console.log(myComm.length);
-      console.log(myComm);
+      // console.log("QUANTIDADE DE DADOS NO ARRAY FILTER");
+      // console.log(myComm.length);
+      // console.log(myComm);
 
       setComentario(myComm.length > 0 ? myComm[0].descricao : "");
       setIdComentario(myComm.length > 0 ? myComm[0].idComentarioEvento : null);
