@@ -29,37 +29,32 @@ const DetalhesEvento = () => {
   const [idEvento, setIdEvento] = useState("");
   const [idComentario, setIdComentario] = useState(null);
 
-  const quaisEventos = [
-    { value: 1, text: "Todos os eventos" },
-    { value: 2, text: "Meus eventos" },
+  const quaisComents = [
+    { value: 1, text: "Todos os comentários" }
   ];
 
   useEffect(() => {
     loadEventsType();
-  }, [tipoEvento, userData.userId]); //
+  }, [comentario, userData.userId]); //
 
   async function loadEventsType() {
     setShowSpinner(true);
     // setEventos([]); //zera o array de eventos
-    if (tipoEvento === "1") {
+    if (comentario === "1") {
       //todos os eventos (Evento)
       try {
-        const todosEventos = await api.get(eventsResource);
-        const meusEventos = await api.get(
-          `${myEventsResource}/${userData.userId}`
-        );
+        const todosComentarios = await api.get(commentaryEventResource);
 
         const eventosMarcados = verificaPresenca(
-          todosEventos.data,
-          meusEventos.data
+          todosComentarios.data
         );
 
         setEventos(eventosMarcados);
 
         // console.clear();
 
-        // console.log("TODOS OS EVENTOS");
-        // console.log(todosEventos.data);
+        console.log("TODOS OS COMENTÁRIOS");
+        console.log(todosComentarios.data);
 
         // console.log("MEUS EVENTOS");
         // console.log(meusEventos.data);
@@ -71,38 +66,38 @@ const DetalhesEvento = () => {
         console.log("Erro na API");
         console.log(error);
       }
-    } else if (tipoEvento === "2") {
-      /**
-       * Lista os meus eventos (PresencasEventos)
-       * retorna um formato diferente de array
-       */
-      try {
-        const retornoEventos = await api.get(
-          `${myEventsResource}/${userData.userId}`
-        );
-        // console.clear();
-        // console.log("MINHAS PRESENÇAS");
-        // console.log(retornoEventos.data);
+    // } else if (tipoEvento === "2") {
+    //   /**
+    //    * Lista os meus eventos (PresencasEventos)
+    //    * retorna um formato diferente de array
+    //    */
+    //   try {
+    //     const retornoEventos = await api.get(
+    //       `${myEventsResource}/${userData.userId}`
+    //     );
+    //     // console.clear();
+    //     // console.log("MINHAS PRESENÇAS");
+    //     // console.log(retornoEventos.data);
 
-        const arrEventos = []; //array vazio
+    //     const arrEventos = []; //array vazio
 
-        retornoEventos.data.forEach((e) => {
-          arrEventos.push({
-            ...e.evento,
-            situacao: e.situacao,
-            idPresencaEvento: e.idPresencaEvento,
-          });
-        });
+    //     retornoEventos.data.forEach((e) => {
+    //       arrEventos.push({
+    //         ...e.evento,
+    //         situacao: e.situacao,
+    //         idPresencaEvento: e.idPresencaEvento,
+    //       });
+    //     });
 
-        // console.log(arrEventos);
-        setEventos(arrEventos);
-      } catch (error) {
-        //colocar o notification
-        console.log("Erro na API");
-        console.log(error);
-      }
-    } else {
-      setEventos([]);
+    //     // console.log(arrEventos);
+    //     setEventos(arrEventos);
+    //   } catch (error) {
+    //     //colocar o notification
+    //     console.log("Erro na API");
+    //     console.log(error);
+    //   }
+    // } else {
+    //   setEventos([]);
     }
     setShowSpinner(false);
   }
@@ -235,55 +230,54 @@ const DetalhesEvento = () => {
     }
   }
 
-  return (
-    <MainContent>
-        <Container>
-          <Title titleText={"Comentários"} additionalClass="custom-title" />
-        </Container>
-    </MainContent>
-  )
+  // return (
+  //   <MainContent>
+  //       <Container>
+  //         <Title titleText={"Comentários"} additionalClass="custom-title" />
+  //       </Container>
+  //   </MainContent>
+  // )
 
   
 
-//     {/* <>
-//       <MainContent>
-//         <Container>
-//           <Title titleText={"Eventos"} additionalClass="custom-title" />
+     <>
+      <MainContent>
+        <Container>
+          <Title titleText={"Comentários"} additionalClass="custom-title" />
 
-//           <Select
-//             id="id-tipo-evento"
-//             name="tipo-evento"
-//             required={true}
-//             options={quaisEventos} // aqui o array dos tipos
-//             manipulationFunction={(e) => myEvents(e.target.value)} // aqui só a variável state
-//             defaultValue={tipoEvento}
-//             additionalClass="select-tp-evento"
-//           />
-//           <TableE
-//             dados={eventos}
-//             fnConnect={handleConnect}
-//             fnShowModal={showHideModal}
-//           />
-//         </Container>
-//       </MainContent>
-//       {/* SPINNER -Feito com position */}
-//       {showSpinner ? <Spinner /> : null}
+          <Select
+            id="id-tipo-evento"
+            name="tipo-evento"
+            required={true}
+            options={quaisEventos} // aqui o array dos tipos
+            manipulationFunction={(e) => myEvents(e.target.value)} // aqui só a variável state
+            defaultValue={tipoEvento}
+            additionalClass="select-tp-evento"
+          />
+          <TableE
+            dados={eventos}
+            fnConnect={handleConnect}
+            fnShowModal={showHideModal}
+          />
+        </Container>
+      </MainContent>
+      {/* SPINNER -Feito com position */}
+      {showSpinner ? <Spinner /> : null}
 
-//       // {showModal ? (
-//       //   <Modal
-//       //     // userId={userData.userId}
-//       //     showHideModal={showHideModal}
-//       //     fnGet={loadMyCommentary}
-//       //     fnPost={postMyCommentary}
-//       //     fnDelete={commentaryRemove}
-//       //     comentaryText={comentario}
-//       //     userId={userData.userId}
-//       //     idEvento={idEvento}
-//       //     idComentario={idComentario}
-//       //   />
-//       // ) : null}
-//   //   </>
-//   // ); */}
+      // {showModal ? (
+        <Modal
+          // userId={userData.userId}
+          showHideModal={showHideModal}
+          fnGet={loadMyCommentary}
+          fnPost={postMyCommentary}
+          fnDelete={commentaryRemove}
+          comentaryText={comentario}
+          userId={userData.userId}
+          idEvento={idEvento}
+          idComentario={idComentario}
+        />
+      ) : null}
+    </>
 };
 
 export default DetalhesEvento;
