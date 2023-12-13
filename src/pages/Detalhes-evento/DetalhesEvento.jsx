@@ -226,7 +226,7 @@ const DetalhesEvento = () => {
             defaultValue={tipoEvento}
             additionalclass="select-tp-evento"
           />
-          <Table
+          <TableE
             dados={eventos}
             fnConnect={handleConnect}
             fnShowModal={() => {
