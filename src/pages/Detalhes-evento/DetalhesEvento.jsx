@@ -264,7 +264,7 @@ return (
       {/* SPINNER -Feito com position */}
       {showSpinner ? <Spinner /> : null}
 
-      // {showModal ? (
+       {showModal ? (
         <Modal
           // userId={userData.userId}
           showHideModal={showHideModal}

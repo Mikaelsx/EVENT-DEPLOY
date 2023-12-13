@@ -15,7 +15,7 @@ const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
       <thead className="tbal-data__head">
         <tr className="tbal-data__head-row tbal-data__head-row--red-color">
           <th className="tbal-data__head-title tbal-data__head-title--big">
-            Evento
+            Comentários
           </th>
           <th className="tbal-data__head-title tbal-data__head-title--big">
             Data
@@ -52,7 +52,7 @@ const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
                   />
                 ) : null}
 
-                {/* <ToggleSwitch
+                <ToggleSwitch
                   toggleActive={e.situacao}
                   manipulationFunction={
                     new Date(e.dataEvento) > Date.now()
@@ -67,7 +67,7 @@ const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
                           alert("Evento não está mais disponível");
                         }
                   }
-                /> */}
+                />
               </td>
             </tr>
           );
