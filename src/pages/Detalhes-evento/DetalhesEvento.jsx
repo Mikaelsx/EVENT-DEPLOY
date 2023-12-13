@@ -45,11 +45,11 @@ const DetalhesEvento = () => {
       try {
         const todosComentarios = await api.get(commentaryEventResource);
 
-        const eventosMarcados = verificaPresenca(
+        const comentariosMarcados = verificaPresenca(
           todosComentarios.data
         );
 
-        setEventos(eventosMarcados);
+        setComentario(comentariosMarcados);
 
         // console.clear();
 
@@ -119,18 +119,18 @@ const DetalhesEvento = () => {
   };
 
   // toggle meus eventos ou todos os eventos
-  function myEvents(tpEvent) {
-    setTipoEvento(tpEvent);
-  }
+  // function myEvents(tpEvent) {
+  //   setTipoEvento(tpEvent);
+  // }
 
-  const showHideModal = (idEvent) => {
+  const showHideModal = (idComentario) => {
     // console.clear();
     // console.log("id do evento atual");
     // console.log(idEvent);
 
     setShowModal(showModal ? false : true);
     // setUserData({ ...userData, idEvento: idEvent });
-    setIdEvento(idEvent);
+    setIdComentario(idComentario);
     // console.log("após guardar no state do usuário");
     // console.log(idEvent);
   };
