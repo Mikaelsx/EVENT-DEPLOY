@@ -239,7 +239,7 @@ const DetalhesEvento = () => {
   // )
 
   
-
+return (
      <>
       <MainContent>
         <Container>
@@ -278,6 +278,7 @@ const DetalhesEvento = () => {
         />
       ) : null}
     </>
+)
 };
 
 export default DetalhesEvento;
