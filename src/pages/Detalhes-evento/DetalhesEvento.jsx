@@ -243,7 +243,7 @@ const DetalhesEvento = () => {
     <>
       <MainContent>
         <Container>
-          <Title titleText={"Eventos"} additionalClass="custom-title" />
+          <Title titleText={"Comentário"} additionalClass="custom-title" />
 
           <Select
             id="id-tipo-evento"
@@ -254,7 +254,7 @@ const DetalhesEvento = () => {
             defaultValue={tipoEvento}
             additionalClass="select-tp-evento"
           />
-          <Table
+          <TableE
             dados={eventos}
             fnConnect={handleConnect}
             fnShowModal={showHideModal}
