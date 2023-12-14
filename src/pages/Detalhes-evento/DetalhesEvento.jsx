@@ -38,14 +38,14 @@ const DetalhesEvento = () => {
 
   useEffect(() => {
     loadEventsType();
-  }, [comentario, userData.userId]); //
+  }, [DetalhesEvento, userData.userId]); //
 
 
 
   async function loadEventsType() {
     setShowSpinner(true);
     // setEventos([]); //zera o array de eventos
-    if (comentario === "1") {
+    if (DetalhesEvento === "1") {
 
       try {
         const retorno = await api.get(commentaryEventResource);
