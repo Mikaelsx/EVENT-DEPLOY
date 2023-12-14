@@ -1,5 +1,6 @@
 import React from "react";
 import "./BeforeEvent.css";
+import { Link, NavLink } from "react-router-dom";
 
 import { Tooltip } from "react-tooltip";
 
@@ -31,14 +32,15 @@ const NextEvent = ({ title, description, eventDate, idEvent }) => {
         {dateFormatDbToView(eventDate)}
       </p>
 
-      <a
-        onClick={() => {
-          to="/detalhes-evento"
-        }}
+      <NavLink
         className="event-card__connect-link"
+        to={"/detalhes-evento"}
+        // onClick={() => {
+        //   to="/detalhes-evento"
+        // }}
       >
         Acessar
-      </a>
+      </NavLink>
     </article>
   );
 };
