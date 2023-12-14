@@ -32,47 +32,44 @@ const DetalhesEvento = () => {
   const [idComentario, setIdComentario] = useState(null);
 
   const quaisEventos = [
-    { value: 1, text: "Meus eventos" },
-    { value: 2, text: "Todos os eventos" },
+    { value: 2, text: "Meus Comentarios" },
+    { value: 1, text: "Todos os Comentarios" },
   ];
 
   useEffect(() => {
     loadEventsType();
-  }, [tipoEvento, userData.userId]); //
+  }, [comentario, userData.userId]); //
 
-  async function loadComentsType() {
-    setShowSpinner(true);
 
-    try {
-      const retorno = await api.get(commentaryEventResource);
-      setComentario(retorno.data);
-      console.log(retorno.data);
-    } catch (error) {
-      console.log("Erro na api");
-      console.log(error);
-    }
-    setShowSpinner(false);
-
-    loadEventsType();
-  }
 
   async function loadEventsType() {
     setShowSpinner(true);
     // setEventos([]); //zera o array de eventos
-    if (tipoEvento === "2") {
-      //todos os eventos (Evento)
+    if (comentario === "1") {
+
       try {
-        const todosEventos = await api.get(eventsResource);
-        const meusEventos = await api.get(
-          `${myEventsResource}/${userData.userId}`
-        );
+        const retorno = await api.get(commentaryEventResource);
+        setComentario(retorno.data);
+        console.log(retorno.data);
+      } catch (error) {
+        console.log("Erro na api");
+        console.log(error);
+      }
 
-        const eventosMarcados = verificaPresenca(
-          todosEventos.data,
-          meusEventos.data
-        );
+      setShowSpinner(false);
+      //todos os eventos (Evento)
+      // try {
+      //   const todosEventos = await api.get(eventsResource);
+      //   const meusEventos = await api.get(
+      //     `${myEventsResource}/${userData.userId}`
+      //   );
 
-        setEventos(eventosMarcados);
+      //   const eventosMarcados = verificaPresenca(
+      //     todosEventos.data,
+      //     meusEventos.data
+      //   );
+
+      //   setEventos(eventosMarcados);
 
         // console.clear();
 
@@ -84,12 +81,12 @@ const DetalhesEvento = () => {
 
         // console.log("EVENTOS MARCADOSSSS:");
         // console.log(eventosMarcados);
-      } catch (error) {
-        //colocar o notification
-        console.log("Erro na API");
-        console.log(error);
-      }
-    } else if (tipoEvento === "1") {
+      // } catch (error) {
+      //   //colocar o notification
+      //   console.log("Erro na API");
+      //   console.log(error);
+      // }
+    } else if (tipoEvento === "2") {
       /**
        * Lista os meus eventos (PresencasEventos)
        * retorna um formato diferente de array
@@ -184,6 +181,8 @@ const DetalhesEvento = () => {
     }
   };
 
+//-------------------------------------------------- Post
+
   // cadastrar um comentário = post
   const postMyCommentary = async (descricao, idUsuario, idEvento) => {
     try {
@@ -202,6 +201,7 @@ const DetalhesEvento = () => {
       console.log(error);
     }
   };
+//-------------------------------------------------- Delete
 
   // remove o comentário - delete
   const commentaryRemove = async (idComentario) => {
@@ -219,6 +219,8 @@ const DetalhesEvento = () => {
       console.log(error);
     }
   };
+
+//-------------------------------------------------- Connect
 
   async function handleConnect(eventId, whatTheFunction, presencaId = null) {
     if (whatTheFunction === "connect") {
@@ -252,6 +254,8 @@ const DetalhesEvento = () => {
       console.log(error);
     }
   }
+
+//-------------------------------------------------- Table
 
   return (
     <>
