@@ -45,9 +45,7 @@ const HomePage = () => {
 
     
     getNextEvents(); //chama a função
-  }, []);
-
-  useEffect(() => {
+//----------------------------------------------------------
     async function getBeforeEvents() {
       try {
         const promiseB = await api.get(nextEventResource);
@@ -59,7 +57,21 @@ const HomePage = () => {
       }
     }
     getBeforeEvents();
-  }, [])
+  }, []);
+
+  // useEffect(() => {
+  //   async function getBeforeEvents() {
+  //     try {
+  //       const promiseB = await api.get(nextEventResource);
+  //       const dadosB = await promiseB.data;
+
+  //       setBeforeEvents(dadosB)
+  //     } catch (error) {
+  //       console.log("não trouxe os todos os eventos , verifique lá!");
+  //     }
+  //   }
+  //   getBeforeEvents();
+  // }, [])
 
   return (
     

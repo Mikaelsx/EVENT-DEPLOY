@@ -10,7 +10,7 @@ import { dateFormatDbToView } from "../../Utils/stringFunctions";
 const BeforeEvent = ({ title, description, eventDate, idEvent }) => {
   function conectar(idEvent) {
     // dá pra usar a prop idEvent? testar
-    alert(`Chamar o recurso para conectar: ${idEvent}`);
+    alert({idEvent});
   }
   return (
     <article className="event-card">

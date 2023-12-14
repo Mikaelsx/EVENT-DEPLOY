@@ -32,8 +32,8 @@ const DetalhesEvento = () => {
   const [idComentario, setIdComentario] = useState(null);
 
   const quaisEventos = [
-    { value: 1, text: "Todos os eventos" },
-    { value: 2, text: "Meus eventos" },
+    { value: 1, text: "Meus eventos" },
+    { value: 2, text: "Todos os eventos" },
   ];
 
   useEffect(() => {
