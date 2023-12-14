@@ -43,7 +43,7 @@ const DetalhesEvento = () => {
   async function loadEventsType() {
     setShowSpinner(true);
     // setEventos([]); //zera o array de eventos
-    if (tipoEvento === "1") {
+    if (tipoEvento === "2") {
       //todos os eventos (Evento)
       try {
         const todosEventos = await api.get(eventsResource);
@@ -73,7 +73,7 @@ const DetalhesEvento = () => {
         console.log("Erro na API");
         console.log(error);
       }
-    } else if (tipoEvento === "2") {
+    } else if (tipoEvento === "1") {
       /**
        * Lista os meus eventos (PresencasEventos)
        * retorna um formato diferente de array
