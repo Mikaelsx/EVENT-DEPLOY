@@ -27,6 +27,8 @@ export const commentaryEventResource = '/ComentariosEvento';
  * Rota para o recurso Próximos Eventos
  */
 export const nextEventResource = '/Evento/ListarProximos';
+
+export const beforeEventResource = '/Evento';
 /**
  * Rota para o recurso Tipos de Eventos
  */

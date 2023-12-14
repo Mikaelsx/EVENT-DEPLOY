@@ -7,14 +7,17 @@ import VisionSection from "../../components/VisionSection/VisionSection";
 import ContactSection from "../../components/ContactSection/ContactSection";
 import Title from "../../components/Title/Title";
 import NextEvent from "../../components/NextEvent/NextEvent";
+import BeforeEvent from "../../components/BeforeEvent/BeforeEvent"
 import Container from "../../components/Container/Container";
 import api from "../../Services/Service";
 import Notification from "../../components/Notification/Notification";
 import { nextEventResource } from "../../Services/Service";
+import { beforeEventResource } from "../../Services/Service";
 
 
 const HomePage = () => {
   const [nextEvents, setNextEvents] = useState([]);
+  const [beforeEvents, setBeforeEvents] = useState([]);
   const [notifyUser, setNotifyUser] = useState(); //Componente Notification
 
   // roda somente na inicialização do componente
@@ -23,6 +26,7 @@ const HomePage = () => {
       try {
         const promise = await api.get(nextEventResource);
         const dados = await promise.data;
+
         // console.log(dados);
         setNextEvents(dados); //atualiza o state
 
@@ -39,8 +43,23 @@ const HomePage = () => {
       }
     }
 
+    
     getNextEvents(); //chama a função
   }, []);
+
+  useEffect(() => {
+    async function getBeforeEvents() {
+      try {
+        const promiseB = await api.get(nextEventResource);
+        const dadosB = await promiseB.data;
+
+        setBeforeEvents(dadosB)
+      } catch (error) {
+        console.log("não trouxe os todos os eventos , verifique lá!");
+      }
+    }
+    getBeforeEvents();
+  }, [])
 
   return (
     
@@ -70,14 +89,14 @@ const HomePage = () => {
       </section>
 
       {/* EVENTOS ANTERIORES*/}
-      <section className="proximos-eventos">
+      <section className="eventos-anteriores">
         <Container>
           <Title titleText={"Eventos Anteriores"} />
 
           <div className="eventos-box">
-            {nextEvents.map((e) => {
+            {beforeEvents.map((e) => {
               return (
-                <NextEvent
+                <BeforeEvent
                   key={e.idEvento}
                   title={e.nomeEvento}
                   description={e.descricao}

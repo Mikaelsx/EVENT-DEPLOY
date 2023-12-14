@@ -241,7 +241,7 @@ const DetalhesEvento = () => {
     <>
       <MainContent>
         <Container>
-          <Title titleText={"Eventos"} additionalClass="custom-title" />
+          <Title titleText={"Comentários"} additionalClass="custom-title" />
 
           <Select
             id="id-tipo-evento"
