@@ -50,7 +50,8 @@ const HomePage = () => {
       try {
         const promiseB = await api.get(nextEventResource);
         const dadosB = await promiseB.data;
-
+        console.log(promiseB.data);
+        console.log(dadosB.data);
         setBeforeEvents(dadosB)
       } catch (error) {
         console.log("não trouxe os todos os eventos , verifique lá!");
