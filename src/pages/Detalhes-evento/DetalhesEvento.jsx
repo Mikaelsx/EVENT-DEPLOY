@@ -40,6 +40,22 @@ const DetalhesEvento = () => {
     loadEventsType();
   }, [tipoEvento, userData.userId]); //
 
+  async function loadComentsType() {
+    setShowSpinner(true);
+
+    try {
+      const retorno = await api.get(commentaryEventResource);
+      setComentario(retorno.data);
+      console.log(retorno.data);
+    } catch (error) {
+      console.log("Erro na api");
+      console.log(error);
+    }
+    setShowSpinner(false);
+
+    loadEventsType();
+  }
+
   async function loadEventsType() {
     setShowSpinner(true);
     // setEventos([]); //zera o array de eventos
