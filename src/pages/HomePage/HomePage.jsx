@@ -48,8 +48,9 @@ const HomePage = () => {
 //----------------------------------------------------------
     async function getBeforeEvents() {
       try {
-        const promiseB = await api.get(nextEventResource);
+        const promiseB = await api.get(beforeEventResource);
         const dadosB = await promiseB.data;
+        console.log("DADOS")
         console.log(promiseB.data);
         console.log(dadosB.data);
         setBeforeEvents(dadosB)
