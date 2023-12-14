@@ -7,7 +7,7 @@ import { Tooltip } from "react-tooltip";
 // importar a função lá do arquivo stringFunction (destructuring)
 import { dateFormatDbToView } from "../../Utils/stringFunctions";
 
-const NextEvent = ({ title, description, eventDate, idEvent }) => {
+const BeforeEvent = ({ title, description, eventDate, idEvent }) => {
   function conectar(idEvent) {
     // dá pra usar a prop idEvent? testar
     alert(`Chamar o recurso para conectar: ${idEvent}`);
@@ -45,4 +45,4 @@ const NextEvent = ({ title, description, eventDate, idEvent }) => {
   );
 };
 
-export default NextEvent;
+export default BeforeEvent;
