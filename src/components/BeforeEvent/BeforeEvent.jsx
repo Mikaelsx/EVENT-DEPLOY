@@ -33,7 +33,7 @@ const NextEvent = ({ title, description, eventDate, idEvent }) => {
 
       <a
         onClick={() => {
-          conectar("/detalhes-evento");
+          to="/detalhes-evento"
         }}
         className="event-card__connect-link"
       >
