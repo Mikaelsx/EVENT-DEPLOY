@@ -51,7 +51,28 @@ const HomePage = () => {
       {/* PRÓXIMOS EVENTOS */}
       <section className="proximos-eventos">
         <Container>
-          {/* <Title titleText={"Próximos Eventos"} /> */}
+          <Title titleText={"Próximos Eventos"} />
+
+          <div className="eventos-box">
+            {nextEvents.map((e) => {
+              return (
+                <NextEvent
+                  key={e.idEvento}
+                  title={e.nomeEvento}
+                  description={e.descricao}
+                  eventDate={e.dataEvento}
+                  idEvent={e.idEvento}
+                />
+              );
+            })}
+          </div>
+        </Container>
+      </section>
+
+      {/* EVENTOS ANTERIORES*/}
+      <section className="proximos-eventos">
+        <Container>
+          <Title titleText={"Eventos Anteriores"} />
 
           <div className="eventos-box">
             {nextEvents.map((e) => {
